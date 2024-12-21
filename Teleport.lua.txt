@@ -1,0 +1,21 @@
+-- Teleport Anywhere Script with Notification
+local Player = game.Players.LocalPlayer
+local Mouse = Player:GetMouse()
+local NotificationService = game:GetService("ReplicatedStorage"):WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+
+-- Function to show notifications
+local function showNotification(message)
+    NotificationService:FireServer(message, "All")
+end
+
+-- Function to teleport the player to the mouse position
+local function teleportToMouse()
+    local targetPosition = Mouse.Hit.p
+    Player.Character:SetPrimaryPartCFrame(CFrame.new(targetPosition))
+    showNotification("Teleporting to location... WORKING!")
+end
+
+-- Detect mouse click and teleport
+Mouse.Button1Down:Connect(function()
+    teleportToMouse()
+end)
